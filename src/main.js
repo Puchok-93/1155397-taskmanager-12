@@ -384,20 +384,20 @@ const render = (container, template, place) => {
   container.insertAdjacentHTML(place, template);
 };
 
-render(siteHeaderElement, createMainControlTemplate(), `beforeend`);
-render(siteMain, createFilterTemplate(), `beforeend`);
-render(siteMain, createBoardTemplate(), `beforeend`);
+render(siteHeaderElement, createMainControlTemplate(), 'beforeend');
+render(siteMain, createFilterTemplate(), 'beforeend');
+render(siteMain, createBoardTemplate(), 'beforeend');
 
-const boardElement = document.querySelector(`.board`);
-const taskListElement = document.querySelector(`.board__tasks`);
+const boardElement = document.querySelector('.board');
+const taskListElement = document.querySelector('.board__tasks');
 
-render(boardElement, createSortTemplate(), `afterBegin`);
-render(taskListElement, createEditTaskTemplate(), `beforeend`);
+render(boardElement, createSortTemplate(), 'afterBegin');
+render(taskListElement, createEditTaskTemplate(), 'beforeend');
 
 for (let i = 0; i <= TASK_COUNT; i++) {
-  render(taskListElement, createTaskTemplate(), `beforeend`);
+  render(taskListElement, createTaskTemplate(), 'beforeend');
 }
 
-render(taskListElement, createMoreTaskButtonTemplate(), `beforeend`);
+render(taskListElement, createMoreTaskButtonTemplate(), 'beforeend');
 
 
