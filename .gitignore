@@ -1,5 +1,5 @@
 * text eol=lf
-
+node_modules/
 *.png binary
 *.jpg binary
 *.jpeg binary

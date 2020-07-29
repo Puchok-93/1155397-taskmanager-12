@@ -110,7 +110,7 @@ const createBoardTemplate = () => {
       <div class="board__tasks"></div>
     </section>`
   );
-}
+};
 
 const createSortTemplate = () => {
   return (
