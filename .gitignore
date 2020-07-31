@@ -6,3 +6,6 @@ node_modules/
 *.webp binary
 *.woff binary
 *.woff2 binary
+
+public/bundle.js
+public/bundle.js.map
