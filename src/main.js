@@ -25,7 +25,8 @@ const taskListElement = boardElement.querySelector(`.board__tasks`);
 render(boardElement, createSortTemplate(), `afterbegin`);
 render(taskListElement, createTaskEditTemplate(tasks[0]));
 
-for (let i = 1; i < Math.min(tasks.length, TASK_COUNT_PER_STEP); i++) {
+const count = Math.min(tasks.length, TASK_COUNT_PER_STEP);
+for (let i = 1; i < count; i++) {
   render(taskListElement, createTaskTemplate(tasks[i]));
 }
 
