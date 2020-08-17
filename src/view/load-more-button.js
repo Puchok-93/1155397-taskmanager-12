@@ -1,17 +1,16 @@
 import {createElement} from "../utils.js";
 
-const createBoardTemplate = () => {
-  return (`<section class="board container"></section>`
-  );
+const createLoadMoreButtonTemplate = () => {
+  return (`<button class="load-more" type="button">load more</button>`);
 };
 
-export default class SiteBoard {
+export default class SiteMoreButton {
   constructor() {
     this._element = null;
   }
 
   getTemplate() {
-    return createBoardTemplate();
+    return createLoadMoreButtonTemplate();
   }
 
   getElement() {
