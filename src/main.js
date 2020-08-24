@@ -24,6 +24,11 @@ const filters = generateFilter(tasks);
 const siteMain = document.querySelector(`.main`);
 const siteHeaderElement = siteMain.querySelector(`.main__control`);
 
+const EscButton = {
+  ESCAPE: `Escape`,
+  ESC: `Esc`,
+};
+
 const renderTask = (taskListElement, task) => {
   const taskComponent = new SiteTask(task);
   const taskEditComponent = new TaskEdit(task);
@@ -39,7 +44,7 @@ const renderTask = (taskListElement, task) => {
   };
 
   const onEscKeyDown = (evt) => {
-    if (evt.key === `Escape` || evt.key === `Esc`) {
+    if (evt.key === EscButton.ESCAPE || evt.key === EscButton.ESC) {
       evt.preventDefault();
       replaceFormToCard();
       document.removeEventListener(`keydown`, onEscKeyDown);
@@ -64,11 +69,15 @@ render(siteHeaderElement, new SiteMenu().getElement());
 render(siteMain, new SiteFilter(filters).getElement());
 render(siteMain, boardComponentElement);
 
-if (tasks.every((task) => task.isArchive)) {
-  render(boardComponentElement, new SiteNoTask().getElement());
-} else {
-  render(boardComponentElement, new SiteSort().getElement());
+const renderTasks = (tasks) => {
+  const isAllTasksIsArchive = tasks.every((task) => task.isArchive);
 
+  if (isAllTasksIsArchive) {
+    render(boardComponentElement, new SiteNoTask().getElement());
+    return;
+  }
+
+  render(boardComponentElement, new SiteSort().getElement());
   render(boardComponentElement, taskListComponentElement);
 
   for (let i = 0; i < Math.min(tasks.length, TASK_COUNT_PER_STEP); i++) {
@@ -95,4 +104,6 @@ if (tasks.every((task) => task.isArchive)) {
       }
     });
   }
-}
+};
+
+renderTasks(tasks);
