@@ -1,4 +1,4 @@
-import {createElement} from "../utils.js";
+import Abstract from "./abstract.js";
 
 const createNoTaskTemolate = () => {
   return (
@@ -7,24 +7,8 @@ const createNoTaskTemolate = () => {
     </p>`);
 };
 
-export default class SiteNoTask {
-  constructor() {
-    this._element = null;
-  }
-
+export default class SiteNoTask extends Abstract {
   getTemplate() {
     return createNoTaskTemolate();
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 }

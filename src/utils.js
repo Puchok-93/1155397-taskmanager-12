@@ -1,5 +1,5 @@
 /* Функция генерации случайного числа */
-
+/*
 export const getRandomInteger = (a = 0, b = 1) => {
   const lower = Math.ceil(Math.min(a, b));
   const upper = Math.floor(Math.max(a, b));
@@ -40,8 +40,8 @@ export const isTaskExpiringToday = (dueDate) => {
   const currentDate = getCurrentDate();
 
   return currentDate.getTime() === dueDate.getTime();
-};
-
+};*/
+/*
 export const renderTemplate = (container, template, place = `beforeend`) => {
   container.insertAdjacentHTML(place, template);
 };
@@ -67,3 +67,4 @@ export const RenderPosition = {
   AFTERBEGIN: `afterbegin`,
   BEFOREEND: `beforeend`
 };
+*/
