@@ -1,5 +1,6 @@
 import {COLORS} from "../const.js";
-import {isTaskExpired, isTaskRepeating, humanizeTaskDueDate, createElement} from "../utils.js";
+import {isTaskExpired, isTaskRepeating, humanizeTaskDueDate} from "../utils/task.js";
+import Abstract from "./abstract.js";
 
 const DEFAULT_TASK = {
   color: COLORS[0],
@@ -22,7 +23,6 @@ const createTaskEditDateTemplate = (dueDate) => {
   return `<button class="card__date-deadline-toggle" type="button">
       date: <span class="card__date-status">${dueDate !== null ? `yes` : `no`}</span>
     </button>
-
     ${dueDate !== null ? `<fieldset class="card__date-deadline">
       <label class="card__input-deadline-wrap">
         <input
@@ -41,7 +41,6 @@ const createTaskEditRepeatingTemplate = (repeating) => {
   return `<button class="card__repeat-toggle" type="button">
     repeat:<span class="card__repeat-status">${isTaskRepeating(repeating) ? `yes` : `no`}</span>
   </button>
-
   ${isTaskRepeating(repeating) ? `<fieldset class="card__repeat-days">
     <div class="card__repeat-days-inner">
       ${Object.entries(repeating).map(([day, repeat]) => `<input
@@ -108,7 +107,6 @@ const createTaskEditTemplate = (task) => {
             <use xlink:href="#wave"></use>
           </svg>
         </div>
-
         <div class="card__textarea-wrap">
           <label>
             <textarea
@@ -118,16 +116,13 @@ const createTaskEditTemplate = (task) => {
             >${description}</textarea>
           </label>
         </div>
-
         <div class="card__settings">
           <div class="card__details">
             <div class="card__dates">
               ${dateTemplate}
-
               ${repeatingTemplate}
             </div>
           </div>
-
           <div class="card__colors-inner">
             <h3 class="card__colors-title">Color</h3>
             <div class="card__colors-wrap">
@@ -135,7 +130,6 @@ const createTaskEditTemplate = (task) => {
             </div>
           </div>
         </div>
-
         <div class="card__status-btns">
           <button class="card__save" type="submit">save</button>
           <button class="card__delete" type="button">delete</button>
@@ -145,24 +139,24 @@ const createTaskEditTemplate = (task) => {
   </article>`;
 };
 
-export default class TaskEdit {
+export default class TaskEdit extends Abstract {
   constructor(task = DEFAULT_TASK) {
+    super();
     this._task = task;
-    this._element = null;
+    this._formSubmitHandler = this._formSubmitHandler.bind(this);
   }
 
   getTemplate() {
     return createTaskEditTemplate(this._task);
   }
 
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-    return this._element;
+  _formSubmitHandler(evt) {
+    evt.preventDefault();
+    this._callback.formSubmit();
   }
 
-  removeElement() {
-    this._element = null;
+  setFormSubmitHandler(callback) {
+    this._callback.formSubmit = callback;
+    this.getElement().querySelector(`form`).addEventListener(`submit`, this._formSubmitHandler);
   }
 }
