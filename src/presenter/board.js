@@ -42,15 +42,15 @@ export default class Board {
   }
 
   _sortTasks(sortType) {
-    switch(sortType) {
+    switch (sortType) {
       case SortType.DATE_UP:
-        this._boardTasks.sort(sortTaskUp)
+        this._boardTasks.sort(sortTaskUp);
         break;
       case SortType.DATE_DOWN:
-        this._boardTasks.sort(sortTaskDown)
+        this._boardTasks.sort(sortTaskDown);
         break;
       default:
-      this._boardTasks = this._sourcedBoardTask.slice();
+        this._boardTasks = this._sourcedBoardTask.slice();
     }
 
     this._currentSortType = sortType;
