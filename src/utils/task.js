@@ -32,3 +32,39 @@ export const isTaskExpiringToday = (dueDate) => {
 
   return currentDate.getTime() === dueDate.getTime();
 };
+
+const getWeigthForNullDate = (dateA, dateB) => {
+  if (dateA === null && dateB === null) {
+    return 0;
+  }
+
+  if (dateA === null) {
+    return 1;
+  }
+
+  if (dateB === null) {
+    return -1;
+  }
+
+  return null;
+};
+
+export const sortTaskUp = (taskA, taskB) => {
+  const weight = getWeigthForNullDate(taskA.dueDate, taskB.dueDate);
+
+  if (weight !== null) {
+    return weight;
+  }
+
+  return taskA.dueDate.getTime() - taskB.dueDate.getTime();
+};
+
+export const sortTaskDown = (taskA, taskB) => {
+  const weight = getWeigthForNullDate(taskA.dueDate, taskB.dueDate);
+
+  if (weight !== null) {
+    return weight;
+  }
+
+  return taskB.dueDate.getTime() - taskA.dueDate.getTime();
+};
